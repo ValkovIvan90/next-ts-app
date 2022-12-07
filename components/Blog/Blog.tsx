@@ -12,9 +12,6 @@ import FeaturedPost from './BlogElements/FeaturedPost';
 import Main from './BlogElements/Main';
 import Sidebar from './BlogElements/Sidebar';
 import Footer from './BlogElements/Footer';
-// import post1 from './blog-post.1.md';
-// import post2 from './blog-post.2.md';
-// import post3 from './blog-post.3.md';
 
 const sections = [
   { title: 'Technology', url: '#' },
@@ -33,7 +30,7 @@ const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
   description:
     "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJavn8_cVqnqpuUvOXo3rFO5ia7J9hehV6w&usqp=CAU',
   imageText: 'main image description',
   linkText: 'Continue reading…',
 };
@@ -57,7 +54,7 @@ const featuredPosts = [
   },
 ];
 
-const posts = [post1, post2, post3];
+const posts = ["post1", "post2", "post3"];
 
 const sidebar = {
   title: 'About',
@@ -90,7 +87,7 @@ export default function Blog() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="Blog  Austria" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
