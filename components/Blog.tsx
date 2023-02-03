@@ -6,12 +6,12 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from './BlogElements/Header';
-import MainFeaturedPost from './BlogElements/MainFeaturedPost';
-import FeaturedPost from './BlogElements/FeaturedPost';
-import Main from './BlogElements/Main';
-import Sidebar from './BlogElements/Sidebar';
-import Footer from './BlogElements/Footer';
+import Header from './Header';
+import MainFeaturedPost from './Blog/MainFeaturedPost';
+import FeaturedPost from './Blog/FeaturedPost';
+import Main from './Blog/Main';
+import Sidebar from './Blog/Sidebar';
+import Footer from './Footer';
 
 const sections = [
   { title: 'Technology', url: '#' },
@@ -82,7 +82,7 @@ const sidebar = {
 
 const theme = createTheme();
 
-export default function Blog() {
+export default function Blog(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -112,4 +112,15 @@ export default function Blog() {
       />
     </ThemeProvider>
   );
+}
+
+async function getStaticProps() {
+  const posts = await getAllPosts();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+
 }
