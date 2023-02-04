@@ -56,15 +56,6 @@ const sidebar = {
 
 const theme = createTheme();
 
-interface IPost {
-  result: {
-    title: string,
-    date: string,
-    description: string,
-    image: string,
-    imageLabel: string
-  }
-};
 interface IResult {
   id: string | number;
   title: string;
@@ -73,9 +64,23 @@ interface IResult {
   image: string;
   imageLabel: string;
 }
+
+interface IPost {
+  result: {
+    [key: string]: {
+      title: string;
+      description: string;
+      date: string;
+      image: string;
+      imageLabel: string;
+    }
+  };
+}
+
 export default function HomePage(props: IPost) {
 
-  const { result } = props;
+  const { result }: IPost = props;
+
 
 
   const arr: IResult[] = Object.entries(result).map(([key, value]) =>
