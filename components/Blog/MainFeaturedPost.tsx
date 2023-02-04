@@ -4,19 +4,11 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import localData from '../../data/local_data';
 
-interface MainFeaturedPostProps {
-  post: {
-    description: string;
-    image: string;
-    imageText: string;
-    linkText: string;
-    title: string;
-  };
-}
 
-export default function MainFeaturedPost(props: MainFeaturedPostProps) {
-  const { post } = props;
+export default function MainFeaturedPost() {
+  const { mainFeaturedPost } = localData;
 
   return (
     <Paper
@@ -28,11 +20,11 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
+        backgroundImage: `url(${mainFeaturedPost.image})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={mainFeaturedPost.image} alt={mainFeaturedPost.imageText} />}
       <Box
         sx={{
           position: 'absolute',
@@ -53,13 +45,13 @@ export default function MainFeaturedPost(props: MainFeaturedPostProps) {
             }}
           >
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              {post.title}
+              {mainFeaturedPost.title}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
-              {post.description}
+              {mainFeaturedPost.description}
             </Typography>
             <Link variant="subtitle1" href="#">
-              {post.linkText}
+              {mainFeaturedPost.linkText}
             </Link>
           </Box>
         </Grid>
