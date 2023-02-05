@@ -4,13 +4,20 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Markdown from './Markdown';
 
+interface IComment {
+  author: string;
+  description: string;
+  date: string;
+  title: string
+}
 interface MainProps {
-  posts: ReadonlyArray<string>;
+  comments: Array<IComment>
   title: string;
 }
 
 export default function Main(props: MainProps) {
-  const { posts, title } = props;
+  const { comments, title } = props;
+  comments.splice(0, 1);
 
   return (
     <Grid
@@ -23,15 +30,17 @@ export default function Main(props: MainProps) {
         },
       }}
     >
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
-      <Divider />
-      {posts.map((post) => (
-        <Markdown className="markdown" key={post.substring(0, 40)}>
-          {post}
-        </Markdown>
-      ))}
+      <>
+        <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+        <Divider />
+        {comments.map((comment, i) => (
+          <Markdown className="markdown" key={comment.title}>
+            {comment}
+          </Markdown>
+        ))}
+      </>
     </Grid>
   );
 }

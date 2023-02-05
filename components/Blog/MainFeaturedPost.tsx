@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-import localData from '../../data/local_data';
+import { localData } from '../../data/local_data';
 
 
 export default function MainFeaturedPost() {
