@@ -2,9 +2,9 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Markdown from './Markdown';
+import Article from './Article';
 
-interface IComment {
+export interface IComment {
   author: string;
   description: string;
   date: string;
@@ -17,7 +17,6 @@ interface MainProps {
 
 export default function Main(props: MainProps) {
   const { comments, title } = props;
-  comments.splice(0, 1);
 
   return (
     <Grid
@@ -35,11 +34,13 @@ export default function Main(props: MainProps) {
           {title}
         </Typography>
         <Divider />
-        {comments.map((comment, i) => (
-          <Markdown className="markdown" key={comment.title}>
-            {comment}
-          </Markdown>
-        ))}
+        {comments.map((e, i) => {
+          if (i != 0) {
+            return <Article key={e.title} props={e} />
+          } else {
+            null
+          }
+        })}
       </>
     </Grid>
   );

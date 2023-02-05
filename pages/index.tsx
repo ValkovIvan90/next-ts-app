@@ -9,7 +9,7 @@ import FeaturedPost from '../components/Blog/FeaturedPost';
 import Main from '../components/Blog/Main';
 import Sidebar from '../components/Blog/Sidebar';
 import Footer from '../components/Footer';
-import { fetchAllPost, fetchAllComment } from '../utils/posts';
+import { fetchAllPost, fetchAllComments } from '../utils/posts';
 import { sections, localData } from '../data/local_data';
 
 
@@ -95,7 +95,7 @@ export async function getStaticProps() {
   let comments;
   try {
     posts = await fetchAllPost();
-    comments = await fetchAllComment();
+    comments = await fetchAllComments();
   } catch (e) {
     return (e as Error).message;
   }
