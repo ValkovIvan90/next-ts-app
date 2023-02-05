@@ -39,7 +39,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
           </CardContent>
           <CardMedia
             component="img"
-            sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
+            sx={{ width: 160, height: 250, display: { xs: 'none', sm: 'block' } }}
             image={post.image}
             alt={post.imageLabel}
           />
