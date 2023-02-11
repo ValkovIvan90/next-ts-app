@@ -3,17 +3,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Article from './Article';
+import { MainProps } from '../../models/interfaces';
 
-export interface IComment {
-  author: string;
-  description: string;
-  date: string;
-  title: string
-}
-interface MainProps {
-  comments: Array<IComment>
-  title: string;
-}
 
 export default function Main(props: MainProps) {
   const { comments, title } = props;

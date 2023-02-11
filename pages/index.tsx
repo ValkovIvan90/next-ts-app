@@ -11,42 +11,19 @@ import Sidebar from '../components/Blog/Sidebar';
 import Footer from '../components/Footer';
 import { fetchAllPost, fetchAllComments } from '../utils/posts';
 import { sections, localData } from '../data/local_data';
+import { IPost, IResult } from '../models/interfaces';
 
 
 const theme = createTheme();
 
-interface IResult {
-  id: string | number;
-  title: string;
-  description: string;
-  date: string;
-  image: string;
-  imageLabel: string;
-}
 
-interface IPost {
-  posts: {
-    [key: string]: {
-      title: string;
-      description: string;
-      date: string;
-      image: string;
-      imageLabel: string;
-    }
-  },
-  comments: [
-    {
-      author: string;
-      date: string;
-      description: string;
-      title: string;
-    }
-  ]
-}
 
 export default function HomePage(props: IPost) {
 
   const { posts, comments }: IPost = props;
+
+  console.log(posts, comments);
+
 
   const arr: IResult[] = Object.entries(posts).map(([key, value]) =>
 
