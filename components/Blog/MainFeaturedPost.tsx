@@ -1,9 +1,5 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import { Grid, Box, Paper, Typography, Link } from '@mui/material';
 import { localData } from '../../data/local_data';
 
 

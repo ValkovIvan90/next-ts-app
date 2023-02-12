@@ -1,11 +1,10 @@
 import React from 'react'
-import { IComment } from './Main'
-
+import { Card, CardContent, Typography } from '@mui/material';
+import { Person, QueryBuilder } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import { Person, QueryBuilder, Title } from '@mui/icons-material';
-import CardContent from '@mui/material/CardContent';
-import { Typography, Grid } from '@mui/material';
+
+import { IComment } from '../../models/interfaces';
+
 
 interface IProps {
   props: IComment

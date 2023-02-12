@@ -1,7 +1,5 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
+import { Grid, Divider, Typography } from '@mui/material';
 import Article from './Article';
 import { MainProps } from '../../models/interfaces';
 

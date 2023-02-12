@@ -1,15 +1,16 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
+import { CssBaseline, Grid, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 import Header from '../components/Header';
 import MainFeaturedPost from '../components/Blog/MainFeaturedPost';
 import FeaturedPost from '../components/Blog/FeaturedPost';
 import Main from '../components/Blog/Main';
 import Sidebar from '../components/Blog/Sidebar';
 import Footer from '../components/Footer';
-import { fetchAllPost, fetchAllComments } from '../utils/posts';
+
+import { fetchAll } from '../utils/fetchData';
 import { sections, localData } from '../data/local_data';
 import { IPost, IResult } from '../models/interfaces';
 
@@ -68,19 +69,17 @@ export default function HomePage(props: IPost) {
 }
 
 export async function getStaticProps() {
-  let posts;
-  let comments;
+  let data;
   try {
-    posts = await fetchAllPost();
-    comments = await fetchAllComments();
+    data = await fetchAll();
   } catch (e) {
     return (e as Error).message;
   }
-
+   console.log(data);
+   
   return {
     props: {
-      posts,
-      comments
+      data
     },
   };
 

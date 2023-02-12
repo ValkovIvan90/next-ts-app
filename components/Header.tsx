@@ -1,9 +1,6 @@
 import * as React from 'react';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import { Toolbar, IconButton, Typography, Link } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
