@@ -1,3 +1,5 @@
+import { ObjectId, WithId } from "mongodb";
+
 export interface IResult {
   id: string | number;
   title: string;
@@ -6,33 +8,32 @@ export interface IResult {
   image: string;
   imageLabel: string;
 }
-export interface IPost {
-  posts: {
-    [key: string]: {
-      title: string;
-      description: string;
-      date: string;
-      image: string;
-      imageLabel: string;
-    }
-  },
-  comments: [
-    {
-      author: string;
-      date: string;
-      description: string;
-      title: string;
-    }
-  ]
-}
-
-export interface IComment {
-  author: string;
-  description: string;
-  date: string;
-  title: string
-}
 export interface MainProps {
   comments: Array<IComment>
   title: string;
+}
+export interface IPost {
+  _id: string;
+  title: string;
+  description: string;
+  date: Date;
+  image: string;
+  imageLabel: string;
+}
+
+export interface IComment {
+  _id: string;
+  author: string;
+  date: Date;
+  description: string;
+  title: string;
+}
+
+export interface IWP {
+  key: number;
+  post: WithId<IPost>;
+}
+export interface IWB {
+  title: string;
+  comments: WithId<IComment[]>
 }

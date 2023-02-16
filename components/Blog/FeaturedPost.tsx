@@ -1,18 +1,10 @@
 import * as React from 'react';
 import { Grid, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { IWP } from '../../models/interfaces';
 
-interface FeaturedPostProps {
-  post: {
-    date: string;
-    description: string;
-    image: string;
-    imageLabel: string;
-    title: string;
-  };
-}
+export default function FeaturedPost({ post }: IWP) {
 
-export default function FeaturedPost(props: FeaturedPostProps) {
-  const { post } = props;
+  const parseDate = post.date.toLocaleDateString();
 
   return (
     <Grid item xs={12} md={6}>
@@ -23,7 +15,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
               {post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+              {parseDate}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {post.description}
