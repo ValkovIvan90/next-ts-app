@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
-import { IWP } from '../../models/interfaces';
+import { IWP } from '../../inter/interfaces';
 
 export default function FeaturedPost({ post }: IWP) {
 

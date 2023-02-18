@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Grid, Divider, Typography } from '@mui/material';
 import Article from './Article';
-import { IWB } from '../../models/interfaces';
+import { IWB } from '../../inter/interfaces';
 
 
 export default function Main({ title, comments }: IWB) {

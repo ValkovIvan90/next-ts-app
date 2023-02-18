@@ -1,19 +1,21 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getBlogs, getPosts } from "../../lib/mongo/fetchAllData";
+import { connectDb } from '../../api-helpers/utils';
+import { getAllDataModels } from "../../api-helpers/controllers/blogData";
+import Logging from "../../library/Logging";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await connectDb();
 
+  /** Log the req */
+  Logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+
+  res.on('finish', () => {
+    /** Log the res */
+    Logging.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
+  });
 
   if (req.method === "GET") {
-    try {
-      const blogs = await getBlogs();
-      const posts = await getPosts();
-      return res.status(200).json({ blogs, posts });
-    } catch (err) {
-      return res.status(500).json({ err: (err as Error).message });
-    }
+    await getAllDataModels(req, res);
   }
-  res.setHeader('Allow', ['GET'])
-  res.status(425).end(`Method ${req.method} is not allowed`);
 };

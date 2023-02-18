@@ -3,7 +3,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { Person, QueryBuilder } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
-import { IComment } from '../../models/interfaces';
+import { IComment } from '../../inter/interfaces';
 
 
 interface IProps {

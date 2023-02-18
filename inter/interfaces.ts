@@ -1,4 +1,3 @@
-import { ObjectId, WithId } from "mongodb";
 
 export interface IResult {
   id: string | number;
@@ -13,7 +12,6 @@ export interface MainProps {
   title: string;
 }
 export interface IPost {
-  _id: string;
   title: string;
   description: string;
   date: Date;
@@ -21,19 +19,9 @@ export interface IPost {
   imageLabel: string;
 }
 
-export interface IComment {
-  _id: string;
+export interface IBlog {
   author: string;
   date: Date;
   description: string;
   title: string;
-}
-
-export interface IWP {
-  key: number;
-  post: WithId<IPost>;
-}
-export interface IWB {
-  title: string;
-  comments: WithId<IComment[]>
 }
