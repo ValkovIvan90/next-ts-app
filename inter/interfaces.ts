@@ -7,10 +7,6 @@ export interface IResult {
   image: string;
   imageLabel: string;
 }
-export interface MainProps {
-  comments: Array<IComment>
-  title: string;
-}
 export interface IPost {
   title: string;
   description: string;

@@ -15,7 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     Logging.info(`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`);
   });
 
+
+  
   if (req.method === "GET") {
-    await getAllDataModels(req, res);
+    return await getAllDataModels(req, res);
   }
 };

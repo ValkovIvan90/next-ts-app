@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Grid, Divider, Typography } from '@mui/material';
 import Article from './Article';
-import { IWB } from '../../inter/interfaces';
 
 
-export default function Main({ title, comments }: IWB) {
+export default function Main({ title, comments }: any) {
 
   return (
     <Grid
@@ -22,9 +21,9 @@ export default function Main({ title, comments }: IWB) {
           {title}
         </Typography>
         <Divider />
-        {comments.map((e) => {
+        {/* {comments.map((e) => {
           return <Article key={e._id} props={e} />
-        })}
+        })} */}
       </>
     </Grid>
   );

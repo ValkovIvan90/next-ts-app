@@ -1,60 +1,61 @@
-// import * as React from 'react';
-// import { CssBaseline, Grid, Container } from '@mui/material';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import { WithId } from 'mongodb';
+import * as React from 'react';
+import { CssBaseline, Grid, Container } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// import Header from '../components/Header';
-// import MainFeaturedPost from '../components/Blog/MainFeaturedPost';
-// import FeaturedPost from '../components/Blog/FeaturedPost';
-// import Main from '../components/Blog/Main';
-// import Sidebar from '../components/Blog/Sidebar';
-// import Footer from '../components/Footer';
+import Header from '../components/Header';
+import MainFeaturedPost from '../components/Blog/MainFeaturedPost';
+import FeaturedPost from '../components/Blog/FeaturedPost';
+import Main from '../components/Blog/Main';
+import Sidebar from '../components/Blog/Sidebar';
+import Footer from '../components/Footer';
 
-// import { IComment, IPost } from '../models/interfaces';
-// import { sections, localData } from '../data/local_data';
-// import { fetchData } from '../utils/fetchServerData';
+import { sections, localData } from '../data/local_data';
+import { getAllBlogData } from '../api-helpers/frontend/utils';
+import { IBlog, IPost } from '../inter/interfaces';
+import { GetStaticProps } from 'next';
 
-// const theme = createTheme();
+const theme = createTheme();
 
 
-// export default async function HomePage() {
+export default function HomePage({ posts, blogs }: { blogs: IBlog[], posts: IPost[] }) {
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container maxWidth="lg">
+                <Header title="Blog  Austria" sections={sections} />
+                <main>
+                    <MainFeaturedPost />
+                    <Grid container spacing={4}>
+                        {posts.map((post: IPost, i: number) => (
+                            <FeaturedPost key={i} post={post} />
+                        ))}
+                    </Grid>
+                    <Grid container spacing={5} sx={{ mt: 3 }}>
+                        <Main title="From the firehose" blogs={blogs} />
+                        <Sidebar
+                            title={localData.sidebar.title}
+                            description={localData.sidebar.description}
+                            archives={localData.sidebar.archives}
+                            social={localData.sidebar.social}
+                        />
+                    </Grid>
+                </main>
+            </Container>
+            <Footer
+                title="Footer"
+                description="Something here to give the footer a purpose!"
+            />
+        </ThemeProvider>
+    );
+}
 
-//   const { blogs, posts } = await fetchData();
+export const getStaticProps: GetStaticProps<{ blogs: IBlog[], posts: IPost[] }> = async () => {
+    const { posts, blogs } = await getAllBlogData();
 
-//   if ('error' in posts) {
-//     return <div>{posts.error}</div>
-//   }
-  
-//   const postData: WithId<IPost[]>[] | { error: string; } = posts;
-//   const blogData: WithId<IComment[]>[] | { error: string; } = blogs;
-
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <CssBaseline />
-//       <Container maxWidth="lg">
-//         <Header title="Blog  Austria" sections={sections} />
-//         <main>
-//           <MainFeaturedPost />
-//           <Grid container spacing={4}>
-//             {postData.map((post: any, i) => (
-//               <FeaturedPost key={i} post={post} />
-//             ))}
-//           </Grid>
-//           <Grid container spacing={5} sx={{ mt: 3 }}>
-//             {/* <Main title="From the firehose" comments={blogData} /> */}
-//             <Sidebar
-//               title={localData.sidebar.title}
-//               description={localData.sidebar.description}
-//               archives={localData.sidebar.archives}
-//               social={localData.sidebar.social}
-//             />
-//           </Grid>
-//         </main>
-//       </Container>
-//       <Footer
-//         title="Footer"
-//         description="Something here to give the footer a purpose!"
-//       />
-//     </ThemeProvider>
-//   );
-// }
+    return {
+        props: {
+            posts: await posts,
+            blogs: await blogs,
+        }
+    };
+}

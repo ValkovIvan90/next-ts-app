@@ -1,4 +1,5 @@
 import type { NextApiHandler } from "next";
+import Logging from "../../library/Logging";
 import { blogModel } from '../models/Blog';
 import { postModel } from '../models/Post';
 
@@ -11,6 +12,7 @@ export const getAllDataModels: NextApiHandler = async (req, res) => {
         blogs = await blogModel.find().lean();
         posts = await postModel.find().lean();
     } catch (err) {
+        Logging.error(`Error - METHOD: [${req.method}] - URL: [${req.url}] - Error: [blogData line 15]`);
         return new Error((err as Error).message);
     }
 

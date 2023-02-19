@@ -3,14 +3,10 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { Person, QueryBuilder } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
-import { IComment } from '../../inter/interfaces';
 
 
-interface IProps {
-  props: IComment
-}
 
-export default function Article({ props }: IProps) {
+export default function Article({ props }: any) {
   const CommentCardWrapper = styled(Card)({
     minWidth: 275,
     '& .MuiTypography-h5': {

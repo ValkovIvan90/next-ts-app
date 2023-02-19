@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Grid, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
-import { IWP } from '../../inter/interfaces';
+import { IPost } from '../../inter/interfaces';
+import { dateParse } from '../../library/parseDate';
 
-export default function FeaturedPost({ post }: IWP) {
-
-  const parseDate = post.date.toLocaleDateString();
+export default function FeaturedPost({ post }: { post: IPost }) {
 
   return (
     <Grid item xs={12} md={6}>
@@ -15,7 +14,7 @@ export default function FeaturedPost({ post }: IWP) {
               {post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {parseDate}
+              {dateParse(post.date)}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {post.description}

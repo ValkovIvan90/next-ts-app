@@ -1,11 +1,47 @@
-import mongoose from "mongoose";
-mongoose.set('strictQuery', false);
+import mongoose from 'mongoose'
+import Logging from '../library/Logging'
 
-export const connectDb = async () => {
+const MONGO_URL = process.env.MONGO_URL
 
-    if (!process.env.MONGO_URL) throw new Error('Please add your Mongo URI to the configuration');
+if (!MONGO_URL) {
+    throw new Error(
+        'Please define the MONGODB_URI environment variable inside .env.local'
+    )
+}
 
-    await mongoose.connect(process.env.MONGO_URL)
-        .then(() => console.log("DB connected"))
-        .catch((err) => console.log(err));
-};
+/**
+ * Global is used here to maintain a cached connection across hot reloads
+ * in development. This prevents connections growing exponentially
+ * during API Route usage.
+ */
+let cached = global.mongoose
+
+if (!cached) {
+    cached = global.mongoose = { conn: null, promise: null }
+}
+
+export async function connectDb() {
+    if (cached.conn) {
+        return cached.conn
+    }
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
+        }
+
+        cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {
+            return mongoose
+        })
+    }
+
+    try {
+        cached.conn = await cached.promise;
+        Logging.dblog();
+    } catch (e) {
+        cached.promise = null
+        throw e
+    }
+
+    return cached.conn
+}
