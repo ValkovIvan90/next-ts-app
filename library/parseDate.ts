@@ -1,11 +1,13 @@
 
 
-export function dateParse(dateString: Date) {
+export function dateParse(dateString: Date | undefined) {
 
-    const date = new Date(dateString);
-    const options: any = { month: 'long', day: 'numeric', year: 'numeric' };
-    const formattedDate = date.toLocaleString('en-US', options);
+    if (dateString !== undefined) {
+        const date = new Date(dateString);
+        const options: any = { month: 'long', day: 'numeric', year: 'numeric' };
+        const formattedDate = date.toLocaleString('en-US', options);
 
-    return formattedDate;
+        return formattedDate;
+    }
 
 }

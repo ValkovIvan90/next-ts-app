@@ -1,16 +1,39 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react';
 
-export function useLocalStorage<T>(key: string, fallbackValue: T) {
-    const [value, setValue] = React.useState(fallbackValue);
-    
-    React.useEffect(() => {
-        const stored = localStorage.getItem(key);
-        setValue(stored ? JSON.parse(stored) : fallbackValue);
-    }, [fallbackValue, key]);
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
 
-    React.useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value]);
+  const setValue = (value: T) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    return [value, setValue] as const;
+  useEffect(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      if (item) {
+        const parsedItem: T = JSON.parse(item);
+        if (parsedItem) {
+          setStoredValue(parsedItem);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [key]);
+
+  return [storedValue, setValue];
 }

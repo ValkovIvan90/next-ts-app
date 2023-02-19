@@ -19,8 +19,12 @@ const theme = createTheme();
 
 
 export default function HomePage({ posts, blogs }: { blogs: IBlog[], posts: IPost[] }) {
-    const setDataToLocal = { 'posts': posts, 'blogs': blogs };
-    const data = useLocalStorage<{ blogs: IBlog[], posts: IPost[] }>("blog_data", setDataToLocal);
+    const [storedData, setStoredData] = useLocalStorage('data', { posts, blogs });
+
+
+    React.useEffect(() => {
+        setStoredData({ posts, blogs });
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>
@@ -30,12 +34,12 @@ export default function HomePage({ posts, blogs }: { blogs: IBlog[], posts: IPos
                 <main>
                     <MainFeaturedPost />
                     <Grid container spacing={4}>
-                        {data[0].posts.map((post: IPost) => (
+                        {storedData.posts.map((post: IPost) => (
                             <FeaturedPost key={post._id} post={post} />
                         ))}
                     </Grid>
                     <Grid container spacing={5} sx={{ mt: 3 }}>
-                        <Main title="From the firehose" blogs={data[0].blogs} />
+                        <Main title="From the firehose" blogs={storedData.blogs} />
                         <Sidebar
                             title={localData.sidebar.title}
                             description={localData.sidebar.description}
