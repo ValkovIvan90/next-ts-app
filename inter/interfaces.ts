@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose";
 
 export interface IResult {
   id: string | number;
@@ -8,6 +9,7 @@ export interface IResult {
   imageLabel: string;
 }
 export interface IPost {
+  _id: string;
   title: string;
   description: string;
   date: Date;
@@ -16,6 +18,7 @@ export interface IPost {
 }
 
 export interface IBlog {
+  _id: ObjectId;
   author: string;
   date: Date;
   description: string;

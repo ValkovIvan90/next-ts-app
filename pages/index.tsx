@@ -13,11 +13,15 @@ import { sections, localData } from '../data/local_data';
 import { getAllBlogData } from '../api-helpers/frontend/utils';
 import { IBlog, IPost } from '../inter/interfaces';
 import { GetStaticProps } from 'next';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const theme = createTheme();
 
 
 export default function HomePage({ posts, blogs }: { blogs: IBlog[], posts: IPost[] }) {
+    const setDataToLocal = { 'posts': posts, 'blogs': blogs };
+    const data = useLocalStorage<{ blogs: IBlog[], posts: IPost[] }>("blog_data", setDataToLocal);
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -26,12 +30,12 @@ export default function HomePage({ posts, blogs }: { blogs: IBlog[], posts: IPos
                 <main>
                     <MainFeaturedPost />
                     <Grid container spacing={4}>
-                        {posts.map((post: IPost, i: number) => (
-                            <FeaturedPost key={i} post={post} />
+                        {data[0].posts.map((post: IPost) => (
+                            <FeaturedPost key={post._id} post={post} />
                         ))}
                     </Grid>
                     <Grid container spacing={5} sx={{ mt: 3 }}>
-                        <Main title="From the firehose" blogs={blogs} />
+                        <Main title="From the firehose" blogs={data[0].blogs} />
                         <Sidebar
                             title={localData.sidebar.title}
                             description={localData.sidebar.description}
